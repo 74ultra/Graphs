@@ -18,7 +18,7 @@ def earliest_ancestor(ancestors, starting_node):
     if starting_node not in anct_list:
         return -1
 
-    # depth first traversal
+    # depth first search
     stack = [[starting_node]]
     visited = set()
     visited.add(starting_node)
