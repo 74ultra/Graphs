@@ -77,13 +77,13 @@ class SocialGraph:
         The key is the friend's ID and the value is the path.
         """
         queue = [user_id]
-        result = []
+        # result = []
         visited = {}  # Note that this is a dictionary, not a set
 
         visited[user_id] = [user_id]
         while len(queue) > 0:
             current_vertex = queue.pop(0)
-            result.append(current_vertex)
+            # result.append(current_vertex)
             for i in self.friendships[current_vertex]:
                 if i not in visited:
                     visited[i] = visited[current_vertex] + [i]
@@ -95,7 +95,29 @@ class SocialGraph:
 
 if __name__ == '__main__':
     sg = SocialGraph()
-    sg.populate_graph(100, 10)
-    print(sg.friendships)
+    sg.populate_graph(10, 3)
+    # print(sg.friendships)
     connections = sg.get_all_social_paths(1)
     print(connections)
+
+    # finding number in extended network and average degrees of separation
+
+    def extended_net(conns):
+        count = 0
+        for i in conns.items():
+            count += 1
+        print(count)
+        return count
+
+    def deg_sep(conns):
+        count = 0
+        for i in conns.values():
+            count += len(i)
+        return count
+
+    def avg_deg_sep(conns):
+        num_friends = extended_net(conns)
+        gross_sep = deg_sep(conns)
+        return gross_sep / num_friends
+
+    # print(avg_deg_sep(connections))
